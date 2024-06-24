@@ -19,7 +19,8 @@ pub fn setup_ground(
     cmds.spawn(MaterialMeshBundle {
         mesh: meshes.add(Cuboid::new(1.5, 1., 1.5)),
         material: mats.add(StandardMaterial {
-            base_color: Color::GRAY,
+            base_color: Color::DARK_GREEN * 0.25,
+            reflectance: 0.01,
             ..default()
         }),
         transform: Transform::from_scale(Vec3::new(500.0, 5.0, 500.0))
@@ -54,6 +55,10 @@ fn setup_camera(mut cmds: Commands) {
     ));
 
     cmds.spawn(DirectionalLightBundle {
+        directional_light: DirectionalLight {
+            illuminance: 400000.0,
+            ..default()
+        },
         transform: Transform::from_rotation(Quat::from_euler(EulerRot::XYZ, -45.0, 45.0, 0.0)),
         ..default()
     });
